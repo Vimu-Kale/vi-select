@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -7,7 +7,6 @@ import {
   InputLabel,
   withStyles,
 } from "@material-ui/core";
-// import "../SelectComponent.css";
 import "./PopupAsyncSelect.css";
 import { CROSS_ICON, PLUS_ICON, SELECT_CARET } from "../../constants/image";
 import { AsyncPaginate } from "react-select-async-paginate";
@@ -44,6 +43,7 @@ const PopupAsyncSelect = ({
   setOtherInputDetails,
   clearOtherInputDetails = () => {},
   handleOnCreate = () => {},
+  handleInputBlur = () => {},
 }) => {
   const [isOther, setIsOther] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -114,7 +114,11 @@ const PopupAsyncSelect = ({
   };
 
   const handleClickAway = () => {
+    setSearchValue("");
     setIsOpen(false);
+    setIsOther(false);
+    clearOtherInputDetails();
+    handleInputBlur(name);
   };
 
   const CaretDownIcon = () => {
@@ -221,6 +225,14 @@ const PopupAsyncSelect = ({
     );
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      setIsOther(false);
+      setSearchValue("");
+      clearOtherInputDetails();
+    }
+  }, [isOpen, clearOtherInputDetails]);
+
   return (
     <Box className="popupselect-component-container">
       {/* BUTTON START */}
@@ -236,7 +248,12 @@ const PopupAsyncSelect = ({
           }
         ${disableSelect ? `custom-select-button-disabled` : ""}`}
           onClick={() => {
-            !disableSelect && setIsOpen(!isOpen);
+            if (!disableSelect) {
+              if (!isOpen === false) {
+                handleInputBlur(name);
+              }
+              setIsOpen(!isOpen);
+            }
           }}
         >
           <div className="custom-select-value">
