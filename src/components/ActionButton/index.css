@@ -1,0 +1,89 @@
+.action-button-positive.MuiButton-root,
+.action-button-positive.MuiButton-root:hover {
+  background: #abdfe2;
+  border-radius: 2px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  text-transform: capitalize;
+  color: #101010;
+  font-family: Lato, sans-serif;
+}
+
+.action-button-disabled.MuiButton-root,
+.action-button-disabled.MuiButton-root:hover {
+  background: #f8f8f9;
+  border-radius: 2px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  text-transform: capitalize;
+  color: #c5c5ce;
+  font-family: Lato, sans-serif;
+}
+
+.action-button-negative.MuiButton-root,
+.action-button-negative.MuiButton-root:hover {
+  border: 1px solid #dcdee2;
+  border-radius: 2px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  text-transform: capitalize;
+  color: #515a6e;
+  font-family: Lato, sans-serif;
+}
+
+.active-table-button-negative.MuiButton-root,
+.active-table-button-negative.MuiButton-root:hover {
+  border: 1px solid #dcdee2;
+  border-radius: 2px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+  text-transform: capitalize;
+  color: #515a6e;
+  font-family: Lato, sans-serif;
+}
+
+.active-table-button-positive.MuiButton-root,
+.active-table-button-positive.MuiButton-root:hover {
+  background: #abdfe2;
+  border-radius: 2px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 22px;
+  text-transform: capitalize;
+  color: #101010;
+  font-family: Lato, sans-serif;
+}
+
+.action-button-download.MuiButton-root,
+.action-button-download.MuiButton-root:hover {
+  border-radius: 2px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  text-transform: uppercase;
+  color: #515a6e;
+  border: 1px solid #dcdee2;
+  font-family: Lato, sans-serif;
+}
+.action-button-disabled.MuiButton-root.Mui-disabled {
+  border: 1px solid #dcdee2 !important;
+}
+.visibility-hidden {
+  visibility: hidden;
+}
+
+.loader-center{
+  position: absolute;
+  top: calc(50% - 12px);
+  left: calc(50% - 13px);
+}
