@@ -26,8 +26,6 @@ const PopupAsyncSelectContainer = () => {
   }, []);
 
   const handleSelectChange = (value, action) => {
-    console.log(value, action);
-
     if (action.action === "pop-value") return;
     const currentTargetName = action.name;
     const CompletePatientDetails = { ...completePatientDetails };
@@ -159,8 +157,6 @@ const PopupAsyncSelectContainer = () => {
         isMulti={true}
         isValid={completePatientDetails.isValidSurgeons}
         helperText={completePatientDetails.surgeonsHelperText}
-        otherHelperText={otherInputDetails.otherHelperText}
-        isValidOther={otherInputDetails.isValidOther}
         otherInputDetails={otherInputDetails}
         setOtherInputDetails={setOtherInputDetails}
         clearOtherInputDetails={clearOtherInputDetails}

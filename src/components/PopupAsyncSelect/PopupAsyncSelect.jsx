@@ -26,6 +26,7 @@ const PopupAsyncSelect = ({
   setIsOpen = () => {},
   placeholder = "Select...",
   otherPlaceholder = "Add Other",
+  selectPlaceholder = "Search...",
   selectValue = [],
   isValid = true,
   helperText = "",
@@ -37,8 +38,6 @@ const PopupAsyncSelect = ({
   onChangeHandler,
   isDisabled = false,
   allowOther = false,
-  otherHelperText = "",
-  isValidOther = false,
   otherInputDetails = {},
   setOtherInputDetails,
   clearOtherInputDetails = () => {},
@@ -47,6 +46,7 @@ const PopupAsyncSelect = ({
 }) => {
   const [isOther, setIsOther] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
 
   const selectStyle = {
     control: (base, { isDisabled, isFocused }) => ({
@@ -208,11 +208,7 @@ const PopupAsyncSelect = ({
   const handleRemoveValue = (e) => {
     const buttonName = e.currentTarget.name;
     const selectName = e.currentTarget.id;
-
-    console.log(selectName, buttonName);
-    console.log(selectValue);
     const removedValue = selectValue.find((val) => val.value === buttonName);
-
     if (!removedValue) return;
     onChangeHandler(
       selectValue.filter((val) => val.value !== buttonName),
@@ -232,6 +228,15 @@ const PopupAsyncSelect = ({
       clearOtherInputDetails();
     }
   }, [isOpen, clearOtherInputDetails]);
+
+  useEffect(() => {
+    setOtherInputDetails({
+      ...otherInputDetails,
+      isValidOther: true,
+      otherHelperText: "",
+      inputValue: inputValue,
+    });
+  }, [inputValue]);
 
   return (
     <Box className="popupselect-component-container">
@@ -283,6 +288,7 @@ const PopupAsyncSelect = ({
             <div className="custom-select-popup-container">
               {/* ACTUAL SELECT COMPONENT */}
               <AsyncPaginate
+                placeholder={selectPlaceholder}
                 menuIsOpen
                 name={name}
                 styles={selectStyle}
@@ -335,17 +341,20 @@ const PopupAsyncSelect = ({
                   <div className="select-other-container">
                     <InputField
                       Placeholder={otherPlaceholder}
-                      Value={otherInputDetails?.inputValue}
+                      // Value={otherInputDetails?.inputValue}
+                      Value={inputValue}
                       OnChange={(e) => {
-                        setOtherInputDetails({
-                          ...otherInputDetails,
-                          isValidOther: true,
-                          otherHelperText: "",
-                          inputValue: e.target.value,
-                        });
+                        // setOtherInputDetails({
+                        //   ...otherInputDetails,
+                        //   isValidOther: true,
+                        //   otherHelperText: "",
+                        //   inputValue: e.target.value,
+                        // });
+
+                        setInputValue(e.target.value);
                       }}
-                      isValid={isValidOther}
-                      Message={otherHelperText}
+                      isValid={otherInputDetails?.isValidOther}
+                      Message={otherInputDetails?.otherHelperText}
                     />
                     <div className="select-other-buttons">
                       <ActionButton
@@ -353,7 +362,7 @@ const PopupAsyncSelect = ({
                         title="Cancel"
                         onClick={() => {
                           setIsOther(false);
-                          clearOtherInputDetails();
+                          // clearOtherInputDetails();
                         }}
                         width={"49%"}
                       />
